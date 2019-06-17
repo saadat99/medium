@@ -12,9 +12,11 @@
     <title>Blog</title>
 </head>
 <body>
-    <header class="container center-align">
+    {% include 'posts/includes/navbar.html' %}
+    {% include 'posts/includes/messages.html' %}
+    <!-- <header class="container center-align">
         <h1>Blog</h1>
-    </header>
+    </header> -->
     <div class="container">
         {% block content %}
             
