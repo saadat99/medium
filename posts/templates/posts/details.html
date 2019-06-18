@@ -8,7 +8,9 @@
         </div>
         <div class="card-action">
             {{post.created_at}}
+            {{post.auther}}
         </div>
     </div>
     <a href="/posts" class="btn">Go Back</a>
+    <a class="waves-effect waves-light btn href" href="{% url 'post_edit' pk=post.pk %}"><i class="material-icons left">edit</i>Edit</a>
 {% endblock %}
