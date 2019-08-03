@@ -8,6 +8,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import PostForm
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+
 
 
 # Create your views here.
@@ -76,13 +78,13 @@ def login_request(request):
         context={"form":form}
     )
 
+@login_required
 def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            # post.published_date = timezone.now()
             post.save()
             return redirect('details', post.pk)
     else:
@@ -91,6 +93,7 @@ def post_new(request):
     form = PostForm()
     return render(request, 'posts/post_edit.html', {'form': form})
 
+@login_required
 def post_edit(request, pk):
     post = get_object_or_404(Posts, pk=pk)
     if request.method == "POST":
