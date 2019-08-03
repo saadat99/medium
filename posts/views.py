@@ -13,7 +13,7 @@ from django.shortcuts import get_object_or_404
 # Create your views here.
 def index(request):
     # return HttpResponse('HELLO')
-    posts = Posts.objects.all()[:10]
+    posts = Posts.objects.all().order_by('-created_at')[:10]
     context = {
         'title' : 'Latest Posts',
         'posts' : posts
