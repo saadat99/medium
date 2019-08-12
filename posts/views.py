@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 # importing post model
 from .models import Posts
 from .forms import NewUserForm
@@ -23,13 +23,13 @@ def index(request):
 
     return render(request, 'posts/index.html', context)
 
-def details(request, id):
+def post_details(request, id):
     posts = Posts.objects.get(id=id)
     context = {
         'post' : posts
     }
 
-    return render(request, 'posts/details.html', context)
+    return render(request, 'posts/post_details.html', context)
 
 def register(request):
     if request.method == "POST":
@@ -84,7 +84,7 @@ def post_new(request):
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.author = request.user
+            post.user = request.user
             post.save()
             return redirect('details', post.pk)
     else:
@@ -96,6 +96,9 @@ def post_new(request):
 @login_required
 def post_edit(request, pk):
     post = get_object_or_404(Posts, pk=pk)
+    # Issue TODO
+    if post.user != request.user:
+        raise Http404  # or similar
     if request.method == "POST":
         form = PostForm(request.POST, instance=post)
         if form.is_valid():

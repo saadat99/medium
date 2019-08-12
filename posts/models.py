@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.conf import settings
 
 # Create your models here.
 class Posts(models.Model):
@@ -10,7 +11,7 @@ class Posts(models.Model):
     # body = RichTextField()
     body = RichTextUploadingField()
     created_at = models.DateTimeField(default=datetime.now, blank=True)
-    author = models.CharField(max_length=200)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)
     # 'Post object' title fix
     def __str__(self):
         return self.title

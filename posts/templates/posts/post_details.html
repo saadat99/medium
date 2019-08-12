@@ -7,8 +7,10 @@
             {{post.body | safe }}
         </div>
         <div class="card-action">
-            {{post.created_at}}
-            {{post.author}}
+            Author: {{ post.user }}
+            <!-- {{ post.user.get_full_name }} -->
+            <br>
+            Date: {{post.created_at}}
         </div>
     </div>
     <a href="/posts" class="btn">Go Back</a>

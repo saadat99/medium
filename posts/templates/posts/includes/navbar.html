@@ -1,8 +1,7 @@
-<nav>
-    <div class="nav-wrapper">
+<nav class="brown">
+    <div class="nav-wrapper container">
         <a href="/" class="brand-logo">Medium</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <a class="btn-floating btn-large waves-effect waves-light red" href="{% url 'post_new' %}"><i class="material-icons">add</i></a>
         <li><a href="/">Home</a></li>
         {% if user.is_authenticated %}
             <li><a href="/account">{{user.username}}</a></li>
@@ -11,6 +10,5 @@
             <li><a href="/register">Register</a></li>
             <li><a href="/login">Login</a></li>
         {% endif %}
-        </ul>
     </div>
 </nav>
