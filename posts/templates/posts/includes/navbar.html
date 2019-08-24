@@ -5,10 +5,10 @@
         <li><a href="/">Home</a></li>
         {% if user.is_authenticated %}
             <li><a href="/account">{{user.username}}</a></li>
-            <li><a href="/logout">Logout</a></li>
+            <li><a href="/accounts/logout">Logout</a></li>
         {% else %}
             <li><a href="/register">Register</a></li>
-            <li><a href="/login">Login</a></li>
+            <li><a href="/accounts/login/">Login</a></li>
         {% endif %}
     </div>
 </nav>
