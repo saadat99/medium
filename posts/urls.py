@@ -1,4 +1,4 @@
-from django.urls import path, re_path, include
+from django.urls import path, re_path, include, reverse_lazy
 from . import views
 from django.contrib.auth import views as auth_views
 
@@ -6,8 +6,25 @@ from django.contrib.auth import views as auth_views
 # app_name = "blog"
 
 urlpatterns = [
+    # -- Change Password
+    path(
+        'accounts/password_change/', auth_views.PasswordChangeView.as_view(
+            template_name='registration/password_change.html',
+            # success_url=reverse_lazy('password_change_done')
+        ),
+        name='password_change'
+    ),
+    # -- Change Password Done
+    path(
+        'accounts/password_change_done/', auth_views.PasswordChangeView.as_view(
+            template_name='registration/password_change_done.html',
+        ),
+        name='password_change_done'
+    ),
+    
     path('accounts/', include('django.contrib.auth.urls')),
     # path('accounts/login/', auth_views.LoginView.as_view(template_name='myapp/login.html')),
+    # path('accounts/password_change/', auth_views.PasswordChangeView.as_view(template_name='registration/password_change_form.html')),
     path('', views.index, name='homepage'),
     path('register', views.register, name='register'),
     path('post/new/', views.post_new, name='post_new'),
