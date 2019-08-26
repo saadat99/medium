@@ -3,6 +3,7 @@ from datetime import datetime
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.conf import settings
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Posts(models.Model):
@@ -19,3 +20,11 @@ class Posts(models.Model):
     # 'Postss' plural fix
     class Meta:
         verbose_name_plural = "Posts"
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    bio = models.TextField(max_length=1000, blank=True)
+
+    def __str__(self):
+        return f'{self.user.username} Profile'

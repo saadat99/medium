@@ -1,0 +1,22 @@
+{% extends 'posts/layout.html' %}
+{% block content %}
+<!-- <h3>{{ user.username }}</h3>
+<p>{{ user.email }}</p>
+<img src="{{ user.profile.image.url }}" alt="hello"> -->
+<div class="row">
+    <div class="col s12 m7">
+      <div class="card horizontal">
+        <div class="card-image">
+          <img src="{{ user.profile.image.url }}">
+          <span class="card-title blue">{{ user.username }}</span>
+        </div>
+        <div class="card-content">
+          <p>{{ user.profile.bio }}</p>
+        </div>
+        <!-- <div class="card-action">
+          <a href="#">This is a link</a>
+        </div> -->
+      </div>
+    </div>
+  </div>
+{% endblock %}

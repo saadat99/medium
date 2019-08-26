@@ -84,3 +84,6 @@ def post_edit(request, pk):
         form = PostForm(instance=post)
     return render(request, 'posts/post_edit.html', {'form': form})
 
+@login_required
+def profile(request):
+    return render(request, 'posts/profile.html')
