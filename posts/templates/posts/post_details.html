@@ -1,10 +1,11 @@
 {% extends "posts/layout.html" %}
 
 {% block content %}
-    <h3 class="center-align red lighten-3">{{post.title}}</h3>
     <div class="card">
+        
         <div class="card-content">
-            {{post.body | safe }}
+            <span class="card-title">{{ post.title }}</span>
+            <p>{{post.body | safe }}</p>
         </div>
         <div class="card-action">
             Author: {{ post.user }}
@@ -14,5 +15,6 @@
         </div>
     </div>
     <a href="/posts" class="btn">Go Back</a>
+    <!-- TODO Hide for not owners -->
     <a class="waves-effect waves-light btn href" href="{% url 'post_edit' pk=post.pk %}"><i class="material-icons left">edit</i>Edit</a>
 {% endblock %}

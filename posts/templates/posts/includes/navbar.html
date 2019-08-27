@@ -12,11 +12,23 @@
 <nav class="brown">
     <div class="nav-wrapper container">
         <a href="/" class="brand-logo">Medium</a>
+        <!-- Adds mobile support -->
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="/">Home</a></li>
         {% if user.is_authenticated %}
             <!-- Dropdown Trigger -->
-            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">{{user.username}}<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li>
+                <a class="dropdown-trigger" href="#!" data-target="dropdown1">
+                    <!-- <a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown"><span class="avatar-status avatar-online"><img src="../../../app-assets/images/avatar/avatar-7.png" alt="avatar"><i></i></span></a> -->
+                    <!-- TODO - fixing the size -->
+                    <!-- <span class="left">{{user.username}}</span> -->
+                    <i class="valign-wrapper">
+                        <img src="{{ user.profile.image.url }}" alt="logo" style="height: 38px;" class="responsive-img circle valign-wrapper">
+                        <i class="material-icons right">arrow_drop_down</i>
+                    </i>      
+                </a>
+            </li>
             <!-- <li><a href="/account">{{user.username}}</a></li> -->
             <!-- <li><a href="/accounts/logout">Logout</a></li> -->
         {% else %}
@@ -24,4 +36,12 @@
             <li><a href="/accounts/login/">Login</a></li>
         {% endif %}
     </div>
+    <!-- TODO Mobile support  -->
+    <ul class="sidenav" id="mobile-demo">
+            <li><a href="sass.html">Sass</a></li>
+            <li><a href="badges.html">Components</a></li>
+            <li><a href="collapsible.html">Javascript</a></li>
+            <li><a href="mobile.html">Mobile</a></li>
+          </ul>
+        
 </nav>
