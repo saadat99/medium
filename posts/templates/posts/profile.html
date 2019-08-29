@@ -14,17 +14,21 @@
       </div>
     </div>
     <div class="col s12 m6">
-      <div class="card blue-grey darken-1">
-        <div class="card-content white-text">
-          <span class="card-title">Card Title</span>
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
-        <div class="card-action">
-          <a href="#">This is a link</a>
-          <a href="#">This is a link</a>
-        </div>
-      </div>
+      {% for post in posts %}
+        <a href="/posts/details/{{post.id}}">
+            <div class="card blue-grey lighten-4">
+                    <div class="card-content black-text">
+                        <span class="card-title">{{ post.title }}</span>
+                        <p>{{ post.body | truncatechars:100 | safe }}</p>
+                        <span class="blue-text text-darken-3">{{ post.user }}   {{ post.created_at|date }}</span>
+                    </div>
+                    <!-- <div class="card-action">
+                        <a href="/posts/details/{{post.id}}">Read more</a>
+                    </div> -->
+                </div>  
+        </a>
+            
+        {% endfor %}
     </div>
   </div>
 </div>

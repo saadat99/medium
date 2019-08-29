@@ -86,4 +86,9 @@ def post_edit(request, pk):
 
 @login_required
 def profile(request):
-    return render(request, 'posts/profile.html')
+    posts = Posts.objects.filter(user=request.user).order_by('-created_at')[:10]
+    context = {
+        'title' : 'Latest Posts',
+        'posts' : posts
+    }
+    return render(request, 'posts/profile.html', context)

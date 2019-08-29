@@ -6,11 +6,11 @@
 
         {% for post in posts %}
         <a href="/posts/details/{{post.id}}">
-            <div class="card blue lighten-5">
+            <div class="card blue-grey lighten-4">
                     <div class="card-content black-text">
                         <span class="card-title">{{ post.title }}</span>
-                        <span class="green-text text-darken-2">by {{ post.user }} at {{ post.created_at|date }}</span>
                         <p>{{ post.body | truncatechars:100 | safe }}</p>
+                        <span class="blue-text text-darken-3">{{ post.user }}   {{ post.created_at|date }}</span>
                     </div>
                     <!-- <div class="card-action">
                         <a href="/posts/details/{{post.id}}">Read more</a>
