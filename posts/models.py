@@ -4,6 +4,7 @@ from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.conf import settings
 from django.contrib.auth.models import User
+from PIL import Image
 
 # Create your models here.
 class Posts(models.Model):
@@ -28,3 +29,14 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user.username} Profile'
+
+    def save(self):
+        super().save()
+        # TODO remove old files, djang-cleanup suggested
+        img = Image.open(self.image.path)
+        size = 300
+
+        if img.height > size or img.width > size:
+            output_size = (size, size)
+            img.thumbnail(output_size)
+            img.save(self.image.path)

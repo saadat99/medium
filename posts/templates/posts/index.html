@@ -1,23 +1,19 @@
 {% extends "posts/layout.html" %}
 
 {% block content %}
-    <a class="waves-effect waves-light btn red" href="{% url 'post_new' %}"><i class="material-icons left">add</i>Write new article</a>
-    <!-- <a class="btn-floating btn-large waves-effect waves-light red" href="{% url 'post_new' %}"><i class="material-icons">add</i></a> -->
-
         {% for post in posts %}
         <a href="/posts/details/{{post.id}}">
             <div class="card blue-grey lighten-4">
-                    <div class="card-content black-text">
-                        <span class="card-title">{{ post.title }}</span>
-                        <p>{{ post.body | truncatechars:100 | safe }}</p>
-                        <span class="blue-text text-darken-3">{{ post.user }}   {{ post.created_at|date }}</span>
-                    </div>
-                    <!-- <div class="card-action">
-                        <a href="/posts/details/{{post.id}}">Read more</a>
-                    </div> -->
-                </div>  
+                <div class="card-content black-text">
+                    <span class="card-title">{{ post.title }}</span>
+                    <p>{{ post.body | truncatechars:100 | safe }}</p>
+                    <span class="blue-text text-darken-3">{{ post.user }}   {{ post.created_at|date }}</span>
+                </div>
+                <!-- <div class="card-action">
+                    <a href="/posts/details/{{post.id}}">Read more</a>
+                </div> -->
+            </div>
         </a>
-            
         {% endfor %}
 
 {% endblock %}

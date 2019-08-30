@@ -5,16 +5,18 @@
         
         <div class="card-content">
             <span class="card-title">{{ post.title }}</span>
+            <!-- TODO find better looking way -->
+            <span class="blue-text text-darken-3">{{ post.user }}   {{ post.created_at|date }}</span>
             <p>{{post.body | safe }}</p>
         </div>
         <div class="card-action">
-            Author: {{ post.user }}
             <!-- {{ post.user.get_full_name }} -->
-            <br>
-            Date: {{post.created_at}}
+            <!-- TODO Hide for not owners -->
+            <a class="waves-effect waves-light btn"><i class="material-icons left">share</i>Share</a>
+            {% if post.user == request.user %}
+            <a class="waves-effect waves-light btn href" href="{% url 'post_edit' pk=post.pk %}"><i class="material-icons left">edit</i>Edit</a>
+            {% endif %}
         </div>
     </div>
-    <a href="/posts" class="btn">Go Back</a>
-    <!-- TODO Hide for not owners -->
-    <a class="waves-effect waves-light btn href" href="{% url 'post_edit' pk=post.pk %}"><i class="material-icons left">edit</i>Edit</a>
+    
 {% endblock %}

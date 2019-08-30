@@ -20,7 +20,7 @@
                     <div class="card-content black-text">
                         <span class="card-title">{{ post.title }}</span>
                         <p>{{ post.body | truncatechars:100 | safe }}</p>
-                        <span class="blue-text text-darken-3">{{ post.user }}   {{ post.created_at|date }}</span>
+                        <span class="red-text text-darken-3">{{ post.created_at|date }}</span>
                     </div>
                     <!-- <div class="card-action">
                         <a href="/posts/details/{{post.id}}">Read more</a>

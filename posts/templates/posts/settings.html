@@ -1,0 +1,11 @@
+{% extends "posts/layout.html" %}
+
+{% block content %}
+    <!-- multipart enctype is needed for saving image -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ u_form.as_p }}
+        {{ p_form.as_p }}
+        <button class="btn">Update</button>
+    </form>
+{% endblock %}
