@@ -2,18 +2,21 @@
 
 {% block content %}
         {% for post in posts %}
-        <a href="/posts/details/{{post.id}}">
-            <div class="card blue-grey lighten-4">
-                <div class="card-content black-text">
+        <div class="card blue-grey lighten-4">
+            <div class="card-content black-text">
+                <a href="/posts/details/{{post.id}}">
                     <span class="card-title">{{ post.title }}</span>
-                    <p>{{ post.body | truncatechars:100 | safe }}</p>
-                    <span class="blue-text text-darken-3">{{ post.user }}   {{ post.created_at|date }}</span>
-                </div>
-                <!-- <div class="card-action">
-                    <a href="/posts/details/{{post.id}}">Read more</a>
-                </div> -->
+                </a>
+                <p>{{ post.body | truncatechars:100 | safe }}</p>
+                <a href="/accounts/profile/{{post.user.username}}">
+                    <span class="green-text" style="font-weight: bold;">{{ post.user.username }}</span>
+                </a>
+                <span class="green-text">{{ post.created_at|date }}</span>
             </div>
-        </a>
+            <!-- <div class="card-action">
+                <a href="/posts/details/{{post.id}}">Read more</a>
+            </div> -->
+        </div>
         {% endfor %}
 
 {% endblock %}

@@ -9,7 +9,7 @@ from django.contrib import messages
 from .forms import PostForm
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -25,7 +25,6 @@ def index(request):
 
 def post_details(request, id):
     posts = Posts.objects.get(id=id)
-    messages.success(request, "nice")
     context = {
         'post' : posts
     }
@@ -84,12 +83,14 @@ def post_edit(request, pk):
         form = PostForm(instance=post)
     return render(request, 'posts/post_edit.html', {'form': form})
 
-@login_required
-def profile(request):
-    posts = Posts.objects.filter(user=request.user).order_by('-created_at')[:10]
+def profile(request, username):
+    # posts = Posts.objects.filter(user=request.user).order_by('-created_at')[:10]
+    user = get_object_or_404(User, username=username)
+    posts = Posts.objects.filter(user=user).order_by('-created_at')[:10]
     context = {
         'title' : 'Latest Posts',
-        'posts' : posts
+        'posts' : posts,
+        'owner' : user        
     }
     return render(request, 'posts/profile.html', context)
 

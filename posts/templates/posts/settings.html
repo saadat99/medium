@@ -1,6 +1,7 @@
 {% extends "posts/layout.html" %}
 
 {% block content %}
+    <a href="/accounts/password_change">Change Password</a>
     <!-- multipart enctype is needed for saving image -->
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
