@@ -1,22 +1,38 @@
 {% extends "posts/layout.html" %}
 
 {% block content %}
-        {% for post in posts %}
-        <div class="card blue-grey lighten-4">
-            <div class="card-content black-text">
-                <a href="/posts/details/{{post.id}}">
-                    <span class="card-title">{{ post.title }}</span>
-                </a>
-                <p>{{ post.body | truncatechars:100 | safe }}</p>
-                <a href="/accounts/profile/{{post.user.username}}">
-                    <span class="green-text" style="font-weight: bold;">{{ post.user.username }}</span>
-                </a>
-                <span class="green-text">{{ post.created_at|date }}</span>
+    <div class="row">
+        {% for post in rand_posts %}
+        <div class="col m6">
+            <div class="card blue-grey lighten-4">
+                <div class="card-content black-text">
+                    <a href="/posts/details/{{post.id}}">
+                        <span class="card-title">{{ post.title }}</span>
+                    </a>
+                    <p>{{ post.body | truncatechars:100 | safe }}</p>
+                    <a href="/accounts/profile/{{post.user.username}}">
+                        <span class="green-text" style="font-weight: bold;">{{ post.user.username }}</span>
+                    </a>
+                    <span class="green-text">{{ post.created_at|date }}</span>
+                </div>
             </div>
-            <!-- <div class="card-action">
-                <a href="/posts/details/{{post.id}}">Read more</a>
-            </div> -->
         </div>
         {% endfor %}
-
+        {% for post in posts %}
+        <div class="col m12">
+            <div class="card blue-grey lighten-4">
+                <div class="card-content black-text">
+                    <a href="/posts/details/{{post.id}}">
+                        <span class="card-title">{{ post.title }}</span>
+                    </a>
+                    <p>{{ post.body | truncatechars:100 | safe }}</p>
+                    <a href="/accounts/profile/{{post.user.username}}">
+                        <span class="green-text" style="font-weight: bold;">{{ post.user.username }}</span>
+                    </a>
+                    <span class="green-text">{{ post.created_at|date }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}    
+    </div>
 {% endblock %}

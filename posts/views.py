@@ -10,15 +10,19 @@ from .forms import PostForm
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+import random
+from django.db.models.aggregates import Count
 
 
 # Create your views here.
 def index(request):
     # return HttpResponse('HELLO')
     posts = Posts.objects.all().order_by('-created_at')[:10]
+    # Could slow database
+    rand_posts = Posts.objects.all().order_by('?')[:2]
     context = {
-        'title' : 'Latest Posts',
-        'posts' : posts
+        'posts': posts,
+        'rand_posts': rand_posts
     }
 
     return render(request, 'posts/index.html', context)
