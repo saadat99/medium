@@ -40,17 +40,20 @@ INSTALLED_APPS = [
     'posts',
     'ckeditor',
     'ckeditor_uploader',
+    'django.forms',
 ]
+
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
-# CKEDITOR_CONFIGS = {
-#     'default': {
-#         'toolbar': 'full',
-#         'width': '100%',
-#         'height': 520,
-#     }
-# }
+CKEDITOR_CONFIGS = {
+    'default': {
+        #'toolbar': 'full',
+        'width': '100%',
+        #'height': 520,
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -67,7 +70,7 @@ ROOT_URLCONF = 'djangoproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
