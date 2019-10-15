@@ -23,6 +23,7 @@ urlpatterns = [
         name='password_change_done'
     ),
     path('accounts/profile/<slug:username>/', views.profile, name='profile'),
+    path('accounts/profile/follow/<slug:username>/<int:action>/', views.follow, name='follow'),
     path('accounts/settings', views.settings, name='settings'),
     path('accounts/', include('django.contrib.auth.urls')),
     # path('accounts/login/', auth_views.LoginView.as_view(template_name='myapp/login.html')),

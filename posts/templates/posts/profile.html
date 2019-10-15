@@ -1,35 +1,45 @@
 {% extends 'posts/layout.html' %}
 {% block content %}
-<div class="col s12 m8 offset-m2 l6 offset-l3">
+<div class="col s10 m8 offset-m2 l6 offset-l3">
   <div class="card-panel grey lighten-5 z-depth-1">
+    
     <div class="row valign-wrapper">
       <div class="col s2">
         <img src="{{ owner.profile.image.url }}" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
       </div>
       <div class="col s10">
-        <h3>{{ owner.username }}</h3>
-        <span class="black-text">
-          {{ owner.profile.bio }}
+        <span>
+          <h3>{{ owner.username }}</h3>
+          {% if not follow_check %}
+          <a href="/accounts/profile/follow/{{ owner.username }}/1/" class="btn waves-effect waves-light grey"><i class="material-icons left">person_add</i>Follow</a>
+          {% else %}
+          <a href="/accounts/profile/follow/{{ owner.username }}/0/" class="btn waves-effect waves-light red"><i class="material-icons left">person_outline</i>Unfollow</a>
+          {% endif %}
         </span>
+        <div class="black-text">
+          {{ owner.profile.bio }}
+        </div>
       </div>
     </div>
+
     <div class="col s12 m6">
       {% for post in posts %}
         <a href="/posts/details/{{post.id}}">
-            <div class="card blue-grey lighten-4">
-                    <div class="card-content black-text">
-                        <span class="card-title">{{ post.title }}</span>
-                        <p>{{ post.body | truncatechars:100 | safe }}</p>
-                        <span class="red-text text-darken-3">{{ post.created_at|date }}</span>
-                    </div>
-                    <!-- <div class="card-action">
-                        <a href="/posts/details/{{post.id}}">Read more</a>
-                    </div> -->
-                </div>  
+          <div class="card blue-grey lighten-4">
+            <div class="card-content black-text">
+                <span class="card-title">{{ post.title }}</span>
+                <p>{{ post.body | truncatechars:100 | safe }}</p>
+                <span class="red-text text-darken-3">{{ post.created_at|date }}</span>
+            </div>
+            <!-- <div class="card-action">
+                <a href="/posts/details/{{post.id}}">Read more</a>
+            </div> -->
+          </div>  
         </a>
-            
         {% endfor %}
     </div>
   </div>
+  <div>hello in dev</div>
 </div>
+<div class="col s2">hello</div>
 {% endblock %}

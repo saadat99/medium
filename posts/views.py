@@ -91,12 +91,38 @@ def profile(request, username):
     # posts = Posts.objects.filter(user=request.user).order_by('-created_at')[:10]
     user = get_object_or_404(User, username=username)
     posts = Posts.objects.filter(user=user).order_by('-created_at')[:10]
+
+    # Check for follow button
+    # TODO more efficient way https://docs.djangoproject.com/en/dev/ref/models/querysets/#exists
+    follow_check = False
+    if user.profile in request.user.profile.follows.all():
+        follow_check = True
+    
     context = {
         'title' : 'Latest Posts',
         'posts' : posts,
-        'owner' : user        
+        'owner' : user,
+        'follow_check' : follow_check        
     }
     return render(request, 'posts/profile.html', context)
+
+def follow(request, username, action):
+    user = get_object_or_404(User, username=username)
+    
+    print(action)
+    if action:
+        request.user.profile.follows.add(user.profile)
+        return HttpResponse('added relation')
+    else:
+        request.user.profile.follows.remove(user.profile)
+        return HttpResponse('removed relation')
+
+    # context = {
+    #     'title' : 'Latest Posts',
+    #     'posts' : posts,
+    #     'owner' : user        
+    # }
+    # return render(request, 'posts/profile.html', context)
 
 @login_required
 def settings(request):
