@@ -8,5 +8,3 @@ python manage.py migrate
 <br>
 python manage.py runserver
 <br>
-
-`by Saadat Esmaeili`
