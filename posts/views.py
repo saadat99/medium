@@ -93,10 +93,11 @@ def profile(request, username):
     posts = Posts.objects.filter(user=user).order_by('-created_at')[:10]
 
     # Check for follow button
-    # TODO more efficient way https://docs.djangoproject.com/en/dev/ref/models/querysets/#exists
+    # TODO more efficient way https://docs.djangoproject.com/en/dev/ref/models/querysets/#exists 
     follow_check = False
-    if user.profile in request.user.profile.follows.all():
-        follow_check = True
+    if request.user.is_authenticated:
+        if user.profile in request.user.profile.follows.all():
+            follow_check = True
     
     context = {
         'title' : 'Latest Posts',

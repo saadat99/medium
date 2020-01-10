@@ -10,10 +10,12 @@
       <div class="col s10">
         <span>
           <h3>{{ owner.username }}</h3>
-          {% if not follow_check %}
-          <a href="/accounts/profile/follow/{{ owner.username }}/1/" class="btn waves-effect waves-light grey"><i class="material-icons left">person_add</i>Follow</a>
-          {% else %}
-          <a href="/accounts/profile/follow/{{ owner.username }}/0/" class="btn waves-effect waves-light red"><i class="material-icons left">person_outline</i>Unfollow</a>
+          {% if user.is_authenticated %}
+            {% if not follow_check %}
+            <a href="/accounts/profile/follow/{{ owner.username }}/1/" class="btn waves-effect waves-light grey"><i class="material-icons left">person_add</i>Follow</a>
+            {% else %}
+            <a href="/accounts/profile/follow/{{ owner.username }}/0/" class="btn waves-effect waves-light red"><i class="material-icons left">person_outline</i>Unfollow</a>
+            {% endif %}
           {% endif %}
         </span>
         <div class="black-text">
