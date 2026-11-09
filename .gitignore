@@ -10,3 +10,5 @@ media/*
 .env
 .env.*
 !.env.example
+
+/staticfiles/
