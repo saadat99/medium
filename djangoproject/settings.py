@@ -20,10 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "SECRET_KEY"
+SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False').lower() == 'true'
 
 # 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with a space between each.
 # For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]'
@@ -39,8 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'posts',
-    'ckeditor',
-    'ckeditor_uploader',
     'django.forms',
 ]
 
@@ -93,11 +90,14 @@ WSGI_APPLICATION = 'djangoproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'test',
-        'USER' : 'postgres',
-        'PASSWORD' : 'password',
-        'HOST' : 'localhost',
-        'PORT' : '5432'
+        'NAME': os.environ.get('POSTGRES_DB', 'medium_dev'),
+        'USER': os.environ.get('POSTGRES_USER', 'medium_dev'),
+        'PASSWORD': os.environ.get(
+            'POSTGRES_PASSWORD',
+            'local_dev_only_password',
+        ),
+        'HOST': os.environ.get('POSTGRES_HOST', '127.0.0.1'),
+        'PORT': os.environ.get('POSTGRES_PORT', '5433'),
     }
 }
 
@@ -154,3 +154,4 @@ MEDIA_ROOT = 'media/'
 LOGIN_URL = '/accounts/login'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

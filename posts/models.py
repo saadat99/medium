@@ -1,6 +1,4 @@
 from django.db import models
-from ckeditor.fields import RichTextField
-from ckeditor_uploader.fields import RichTextUploadingField
 from django.conf import settings
 from django.contrib.auth.models import User
 from PIL import Image
@@ -10,7 +8,7 @@ class Posts(models.Model):
     title = models.CharField(max_length=200)
     # body = models.TextField()
     # body = RichTextField()
-    body = RichTextUploadingField()
+    body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)
     # 'Post object' title fix

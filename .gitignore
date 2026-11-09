@@ -1,6 +1,12 @@
 __pycache__/
 db.sqlite3
 venv
+.venv/
 static
 media/*
 !media/default.jpg
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
