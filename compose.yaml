@@ -16,9 +16,9 @@ services:
       retries: 10
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
-    ports:
-      - "127.0.0.1:8000:8000"
+    command: gunicorn djangoproject.wsgi:application --bind 0.0.0.0:8000 --access-logfile - --error-logfile -
+    expose:
+      - "8000"
     environment:
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:?Set DJANGO_SECRET_KEY}
       DJANGO_DEBUG: ${DJANGO_DEBUG:-False}
@@ -33,7 +33,15 @@ services:
     depends_on:
       db:
         condition: service_healthy
-
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "127.0.0.1:8000:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./media:/var/www/media:ro
+    depends_on:
+      - web
 
 volumes:
   medium_dev_pgdata:
