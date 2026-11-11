@@ -7,3 +7,9 @@ __pycache__
 *.sqlite3
 media
 staticfiles
+
+# Local database backups
+backups/
+*.dump
+*.sql
+*.sql.gz
