@@ -41,6 +41,7 @@ services:
       POSTGRES_PORT: "5432"
     volumes:
       - media:/app/media
+      - staticfiles:/app/staticfiles
     depends_on:
       db:
         condition: service_healthy
@@ -59,3 +60,4 @@ services:
 volumes:
   pgdata:
   media:
+  staticfiles:
